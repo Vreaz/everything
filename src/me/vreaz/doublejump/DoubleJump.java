@@ -1,35 +1,44 @@
 package me.vreaz.doublejump;
 
 import org.bukkit.GameMode;
-import org.bukkit.block.Block;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.util.Vector;
-
-import net.minecraft.server.v1_8_R3.Material;
 
 public class DoubleJump implements Listener {
 	
 	@EventHandler
-	public void onPlayJoin(PlayerJoinEvent e) {
-		e.getPlayer().setAllowFlight(true);
+	public void onJoin(PlayerJoinEvent e) {
+		Player p = e.getPlayer();
+		p.setAllowFlight(true);
+		p.setFlying(false);
 	}
 	
 	@EventHandler
-	public void onPlayerDoubleJump(PlayerToggleFlightEvent e) {
+	public void onFly(PlayerToggleFlightEvent e) {
 		Player p = e.getPlayer();
-		if(p.getGameMode() != GameMode.CREATIVE) {
+		if(p.getGameMode() == GameMode.SURVIVAL) {
 			e.setCancelled(true);
-			Block b = p.getWorld().getBlockAt(p.getLocation().subtract(0,2,0));
-			if(!b.getType().equals(Material.AIR)) {
-				Vector v = p.getLocation().getDirection().multiply(1).setY(1);
-				p.setVelocity(v);
-			}
+			p.setAllowFlight(false);
+			p.setFlying(false);
+			p.setVelocity(p.getLocation().getDirection().multiply(2).add(new Vector(0,1.5,0)));
 		}
 	}
 	
+	@EventHandler
+	public void onMove(PlayerMoveEvent e) {
+		Player p = e.getPlayer();
+		if(p.getGameMode() == GameMode.SURVIVAL) {
+			if(p.getLocation().add(0,-1,0).getBlock().getType() != Material.AIR) {
+				p.setAllowFlight(true);
+				p.setFlying(false);
+			}
+		}
+	}
 
 }
