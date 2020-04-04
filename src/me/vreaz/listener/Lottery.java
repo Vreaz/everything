@@ -37,7 +37,7 @@ public class Lottery implements Listener{
 
 	            
 	            
-	            ItemStack placeholder = new ItemStack(Material.GRAY_STAINED_GLASS,1);
+	            ItemStack placeholder = new ItemStack(Material.STAINED_GLASS_PANE,1, (short)7);
 	            ItemMeta placeholder01 = placeholder.getItemMeta();
 	            placeholder01.setDisplayName(" ");
 	            placeholder.setItemMeta(placeholder01);
@@ -77,7 +77,7 @@ public class Lottery implements Listener{
 	            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
 					@Override
 					public void run() {			
-						p.playSound(p.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1f, 1f);
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 						
 						for (int counter0 = 0; counter0 <= 8; counter0++) {
 			            	inv.setItem(counter0, placeholder);
@@ -87,7 +87,7 @@ public class Lottery implements Listener{
 	            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
 					@Override
 					public void run() {			
-						p.playSound(p.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1f, 1f);
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 						for (int counter1 = 9; counter1 <= 17; counter1++) {
 			            	inv.setItem(counter1, placeholder);
 			            }
@@ -96,7 +96,7 @@ public class Lottery implements Listener{
 	            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
 					@Override
 					public void run() {			
-						p.playSound(p.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1f, 1f);
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 						for (int counter2 = 18; counter2 <= 26; counter2++) {
 			            	inv.setItem(counter2, placeholder);
 			            	 inv.setItem(20, air);
@@ -108,7 +108,7 @@ public class Lottery implements Listener{
 	            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
 					@Override
 					public void run() {			
-						p.playSound(p.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1f, 1f);
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 						for (int counter3 = 27; counter3 <= 35; counter3++) {
 			            	inv.setItem(counter3, placeholder);
 			            }
@@ -117,7 +117,7 @@ public class Lottery implements Listener{
 	            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
 					@Override
 					public void run() {			
-						p.playSound(p.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1f, 1f);
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 						for (int counter4 = 36; counter4 <= 44; counter4++) {
 			            	inv.setItem(counter4, placeholder);
 			            }
@@ -131,14 +131,14 @@ public class Lottery implements Listener{
 	            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
 					@Override
 					public void run() {			
-						p.playSound(p.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1f, 1f);
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 						inv.setItem(20, ticket);
 					}	            	
 	            }, 8);
 	            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
 					@Override
 					public void run() {			
-						p.playSound(p.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1f, 1f);
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 			            
 			            inv.setItem(22, einlösen);
 					}	            	
@@ -146,7 +146,7 @@ public class Lottery implements Listener{
 	            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
 					@Override
 					public void run() {			
-						p.playSound(p.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1f, 1f);
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 			            
 			            inv.setItem(24, losekaufen);
 					}	            	
@@ -155,7 +155,6 @@ public class Lottery implements Listener{
 		}
 
 		}
-
 
 
 	@EventHandler 
@@ -172,7 +171,8 @@ public class Lottery implements Listener{
 		{
 			
 			
-			if(e.getView().getInventory().getTitle().equals("§d§lLose")) {
+			if(e.getInventory().getName().equals("§d§lLose")) {
+				if(e.getInventory().getName().equals("Reparatur")) {
 				e.setCancelled(true);
 			if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§dLose kaufen" )) {
 				e.setCancelled(true);
@@ -180,7 +180,7 @@ public class Lottery implements Listener{
 
 				
 					
-				ItemStack placeholder = new ItemStack(Material.GRAY_STAINED_GLASS,1);
+				ItemStack placeholder = new ItemStack(Material.STAINED_GLASS_PANE,1, (short)7);
 	            ItemMeta placeholder01 = placeholder.getItemMeta();
 	            placeholder01.setDisplayName(" ");
 	            placeholder.setItemMeta(placeholder01);
@@ -225,7 +225,7 @@ public class Lottery implements Listener{
 				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
 					@Override
 					public void run() {			
-						p.playSound(p.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1f, 1f);
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 			            
 			            shop.setItem(2, los1);
 					}	            	
@@ -233,7 +233,7 @@ public class Lottery implements Listener{
 				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
 					@Override
 					public void run() {			
-						p.playSound(p.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1f, 1f);
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 			            
 			            shop.setItem(4, los2);
 					}	            	
@@ -241,20 +241,22 @@ public class Lottery implements Listener{
 				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
 					@Override
 					public void run() {			
-						p.playSound(p.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1f, 1f);
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 			            
 			            shop.setItem(6, los3);
 					}	            	
 	            }, 9);
 				
-					p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
+					p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1f, 1f);
 					
 					
 					
 					
 		}
+				}
+			}
 		}
-		}
+	
 	}		
 					
 					
@@ -311,11 +313,11 @@ public class Lottery implements Listener{
 									ConfigManager.get().set(p.getName() + ".lose", auszahlung);
 									ConfigManager.save();
 									p.sendMessage("§3§lDG §7» Du hast §a1x Los gekauft!");
-									p.playSound(p.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1f, 1f);
+									p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 									
 									} else {
 										p.sendMessage("§3§lDG §7» §cDu hast nicht genügend Coins!");
-										p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_LAND, 1f, 1f);
+										p.playSound(p.getLocation(), Sound.ANVIL_LAND, 1f, 1f);
 									}
 									
 								}
@@ -349,11 +351,11 @@ public class Lottery implements Listener{
 									ConfigManager.get().set(p.getName() + ".lose", auszahlung);
 									ConfigManager.save();
 									p.sendMessage("§3§lDG §7» Du hast §a3x Los gekauft!");
-									p.playSound(p.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1f, 1f);
+									p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 									
 									} else {
 										p.sendMessage("§3§lDG §7» §cDu hast nicht genügend Coins!");
-										p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_LAND, 1f, 1f);
+										p.playSound(p.getLocation(), Sound.ANVIL_LAND, 1f, 1f);
 									}
 								}
 							
@@ -384,11 +386,11 @@ public class Lottery implements Listener{
 									ConfigManager.get().set(p.getName() + ".lose", auszahlung);
 									ConfigManager.save();
 									p.sendMessage("§3§lDG §7» Du hast §a5x Los gekauft!");
-									p.playSound(p.getLocation(), Sound.BLOCK_STONE_BUTTON_CLICK_OFF, 1f, 1f);
+									p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 									
 									} else {
 										p.sendMessage("§3§lDG §7» §cDu hast nicht genügend Coins!");
-										p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_LAND, 1f, 1f);
+										p.playSound(p.getLocation(), Sound.ANVIL_LAND, 1f, 1f);
 									}
 								}
 							

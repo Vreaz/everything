@@ -25,7 +25,6 @@ public class ScoreboardLobby implements Listener{
 
 	public void setScoreboard(Player p) {
 		Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-		@SuppressWarnings("deprecation")
 		Objective obj = board.registerNewObjective("scoreboard-main", "dummy");
 		
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);

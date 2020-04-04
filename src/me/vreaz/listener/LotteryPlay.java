@@ -41,7 +41,6 @@ public class LotteryPlay implements Listener{
 			return;
 		}
 		if(e.getInventory().getName().equals("§d§lLose")) {
-			if(e.geti
 			if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§eEinlösen")) {
 					
 				int Lose = ConfigManager.get().getInt(p.getName()+ ".lose");
