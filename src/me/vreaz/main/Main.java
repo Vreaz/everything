@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
+import me.vreaz.doublejump.DoubleJump;
 import me.vreaz.listener.JoinListener;
 import me.vreaz.listener.RunListener;
 import me.vreaz.listener.SneakListener;
@@ -20,7 +20,7 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		System.out.print("§aDas Plugin wurde erfolgreich gestartet!");
+		System.out.print("ï¿½aDas Plugin wurde erfolgreich gestartet!");
 		
 		PluginManager pm = Bukkit.getServer().getPluginManager();
 		
@@ -31,6 +31,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new Lottery(), this);
 		pm.registerEvents(new LotteryPlay(), this);
 		pm.registerEvents(new LotteryAgainPlay(), this);
+		pm.registerEvents(new DoubleJump(), this);
 		new ScoreboardLobby().startAnimation();
 		new ScoreboardLobby().updateCoins();
 	
@@ -48,7 +49,7 @@ public class Main extends JavaPlugin {
 	
 	public void onDisable() {
 		
-		System.out.print("§4Das Plugin wurde NICHT erfolgreich gestartet!");
+		System.out.print("ï¿½4Das Plugin wurde NICHT erfolgreich gestartet!");
 		
 	}
 	
