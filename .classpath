@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/tobii/Documents/Server/plugins/TitleAPI-1.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tobii/Downloads/CoinsAPI 1.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tobii/Documents/Server/plugins/ParticleAPI_v2.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tobii/Downloads/FriendSystem.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tobii/Downloads/ClanTags.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tobii/Downloads/spigot-1.15.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
