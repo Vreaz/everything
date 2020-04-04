@@ -6,11 +6,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 
 import me.vreaz.listener.JoinListener;
-import me.vreaz.listener.Lottery;
-import me.vreaz.listener.LotteryAgainPlay;
-import me.vreaz.listener.LotteryPlay;
 import me.vreaz.listener.RunListener;
 import me.vreaz.listener.SneakListener;
+import me.vreaz.lottery.Lottery;
+import me.vreaz.lottery.LotteryAgainPlay;
+import me.vreaz.lottery.LotteryPlay;
 import me.vreaz.manager.ConfigManager;
 import me.vreaz.manager.ScoreboardLobby;
 
