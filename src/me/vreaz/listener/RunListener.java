@@ -1,6 +1,7 @@
 package me.vreaz.listener;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,8 +15,13 @@ public class RunListener implements Listener{
 		Player p = e.getPlayer();
 		
 		if(p.isSprinting()) {
-			ParticleEffect.CLOUD.send(Bukkit.getOnlinePlayers(), p.getLocation(), 0, 0, 0, 0, 1);
+			if(!p.isFlying()) {
+				if(p.getLocation().add(0,-1.5,0).getBlock().getType() != Material.AIR) {
+					ParticleEffect.CLOUD.send(Bukkit.getOnlinePlayers(), p.getLocation(), 0, 0, 0, 0, 1);
+				}
+			}
 		}
+		
 	}
 	
 

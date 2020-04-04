@@ -1,7 +1,9 @@
 package me.vreaz.doublejump;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,6 +11,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.util.Vector;
+import org.inventivetalent.particle.ParticleEffect;
 
 public class DoubleJump implements Listener {
 	
@@ -26,7 +29,8 @@ public class DoubleJump implements Listener {
 			e.setCancelled(true);
 			p.setAllowFlight(false);
 			p.setFlying(false);
-			p.setVelocity(p.getLocation().getDirection().multiply(2).add(new Vector(0,1.5,0)));
+			p.setVelocity(p.getLocation().getDirection().multiply(1.5).add(new Vector(0,1.1,0)));
+			ParticleEffect.FLAME.send(Bukkit.getOnlinePlayers(), p.getLocation(), 1, 1, 1, 0, 10);
 		}
 	}
 	
@@ -39,6 +43,14 @@ public class DoubleJump implements Listener {
 				p.setFlying(false);
 			}
 		}
+		
 	}
-
+	@EventHandler
+	public void onFly2(PlayerMoveEvent e) {
+		Player p = e.getPlayer();
+		if(p.getLocation().add(0,-1.5,0).getBlock().getType() == Material.AIR) {
+			ParticleEffect.FLAME.send(Bukkit.getOnlinePlayers(), p.getLocation(), 0.5, 0.5, 0.5, 0, 5);
+		}
+		
+	}
 }

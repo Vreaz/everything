@@ -12,7 +12,6 @@ import me.vreaz.lottery.Lottery;
 import me.vreaz.lottery.LotteryAgainPlay;
 import me.vreaz.lottery.LotteryPlay;
 import me.vreaz.manager.ConfigManager;
-import me.vreaz.manager.ScoreboardLobby;
 
 
 public class Main extends JavaPlugin {
@@ -27,13 +26,10 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new SneakListener(), this); 
 		pm.registerEvents(new RunListener(), this); 
 		pm.registerEvents(new JoinListener(), this);
-		pm.registerEvents(new ScoreboardLobby(), this);
 		pm.registerEvents(new Lottery(), this);
 		pm.registerEvents(new LotteryPlay(), this);
 		pm.registerEvents(new LotteryAgainPlay(), this);
 		pm.registerEvents(new DoubleJump(), this);
-		new ScoreboardLobby().startAnimation();
-		new ScoreboardLobby().updateCoins();
 	
 		
 		getConfig().options().copyDefaults();

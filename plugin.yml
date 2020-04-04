@@ -1,9 +1,0 @@
-name: Everything
-version: 0.1
-description: 
-author: vreazdev
-
-main: me.vreaz.main.Main
-
-commands:
-  test: 

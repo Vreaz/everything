@@ -425,7 +425,6 @@ public class LotteryAgainPlay implements Listener{
     	
     	
     	} else if (spingewöhnlich <3){
-    		p.sendMessage("animation 2");
     		
     		Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
     			@Override

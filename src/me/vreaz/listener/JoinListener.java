@@ -25,7 +25,6 @@ import org.bukkit.util.Vector;
 import com.connorlinfoot.titleapi.TitleAPI;
 
 import me.vreaz.main.Main;
-import me.vreaz.manager.ScoreboardLobby;
 
 public class JoinListener implements Listener{
 	@EventHandler
@@ -36,9 +35,8 @@ public class JoinListener implements Listener{
 		p.sendMessage(" ");
 		p.setMaxHealth(6);
 		}
-		new ScoreboardLobby().setScoreboard(p);
 		
-		TitleAPI.sendTitle(p, 20, 60, 15, "§3Willkommen auf", "§bDrainGang");
+		TitleAPI.sendTitle(p, 20, 60, 15, "ï¿½3Willkommen auf", "ï¿½bDrainGang");
 		
 	}
 	
