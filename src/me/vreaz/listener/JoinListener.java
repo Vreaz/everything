@@ -1,6 +1,8 @@
 package me.vreaz.listener;
 
 
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -36,7 +38,17 @@ public class JoinListener implements Listener{
 		p.setMaxHealth(6);
 		}
 		
-		TitleAPI.sendTitle(p, 20, 60, 15, "�3Willkommen auf", "�bDrainGang");
+		TitleAPI.sendTitle(p, 20, 60, 15, "§3Willkommen auf", "§bDrainGang");
+		
+		ItemStack shownPlayers = new ItemStack(Material.INK_SACK,1,(short)5);
+		ItemMeta shownPlayersMeta = shownPlayers.getItemMeta();		
+		ArrayList <String> shownPlayersLore = new ArrayList<>();
+		shownPlayersLore.add("§7Rechtsklick um alle Spieler zu verstecken");
+		shownPlayersMeta.setDisplayName("§cSpieler verstecken");
+		shownPlayersMeta.setLore(shownPlayersLore);
+		shownPlayers.setItemMeta(shownPlayersMeta);
+		
+		p.getInventory().setItem(8, shownPlayers);
 		
 	}
 	

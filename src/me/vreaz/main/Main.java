@@ -5,6 +5,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.vreaz.doublejump.DoubleJump;
+import me.vreaz.inventories.HidePlayers;
 import me.vreaz.listener.JoinListener;
 import me.vreaz.listener.RunListener;
 import me.vreaz.listener.SneakListener;
@@ -30,7 +31,8 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new LotteryPlay(), this);
 		pm.registerEvents(new LotteryAgainPlay(), this);
 		pm.registerEvents(new DoubleJump(), this);
-	
+		pm.registerEvents(new HidePlayers(), this);
+		
 		
 		getConfig().options().copyDefaults();
         saveDefaultConfig();

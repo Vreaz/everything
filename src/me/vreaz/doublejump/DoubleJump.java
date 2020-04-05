@@ -3,7 +3,6 @@ package me.vreaz.doublejump;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,7 +28,7 @@ public class DoubleJump implements Listener {
 			e.setCancelled(true);
 			p.setAllowFlight(false);
 			p.setFlying(false);
-			p.setVelocity(p.getLocation().getDirection().multiply(1.5).add(new Vector(0,1.1,0)));
+			p.setVelocity(p.getLocation().getDirection().multiply(1.5).add(new Vector(0,1.5,0)));
 			ParticleEffect.FLAME.send(Bukkit.getOnlinePlayers(), p.getLocation(), 1, 1, 1, 0, 10);
 		}
 	}
