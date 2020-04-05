@@ -3,6 +3,7 @@ package me.vreaz.inventories;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -15,8 +16,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.util.Vector;
 
 import de.NeonnBukkit.CoinsAPI.Main;
+import sun.net.www.content.text.plain;
 
 public class Navigation implements Listener{
 	
@@ -169,9 +172,24 @@ public class Navigation implements Listener{
 		}
 		
 		//When you try to get item out of the inventory "§d§lNavigation" cancel this action
-			if(e.getInventory().getName().equals("§d§lNavigation")) { 
-				   e.setCancelled(true);	
+		if(e.getInventory().getName().equals("§d§lNavigation")) { 
+			e.setCancelled(true);	
+		}
+		
+		if(e.getInventory().getName().equals("§d§lNavigation")) {
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cSchließen")) {
+				Player p = (Player)e.getWhoClicked();
+				p.closeInventory();
 			}
+		}
+		if(e.getInventory().getName().equals("§d§lNavigation")) {
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cBedWars")) {
+				Player p = (Player)e.getWhoClicked();
+				Location xyz = new Location(p.getWorld(),88,151,27);
+				p.teleport(xyz);
+			}
+		}
+		
 	}
 
 }
