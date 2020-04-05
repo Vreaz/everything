@@ -1,0 +1,8 @@
+name: Everything
+version: 1.2
+description: 
+author: vreazdev
+
+main: me.vreaz.main.Main
+
+commands:

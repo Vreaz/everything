@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -20,10 +21,10 @@ import de.NeonnBukkit.CoinsAPI.Main;
 public class Navigation implements Listener{
 	
 	@EventHandler
-	public ItemStack navigation(PlayerInteractEvent e) {
+	public void navigation(PlayerInteractEvent e) {
 		
 		Player p = e.getPlayer();
-		ItemStack navigation = new ItemStack(Material.COMPASS,1,(short)1);
+		ItemStack navigation = new ItemStack(Material.COMPASS);
 		ItemMeta navigationMeta = navigation.getItemMeta();
 		ArrayList <String> navigationLore = new ArrayList<>();
 		navigationLore.add("§7Rechtsklick um die Navigation zu öffnen");
@@ -31,15 +32,16 @@ public class Navigation implements Listener{
 		navigationMeta.setLore(navigationLore);
 		navigation.setItemMeta(navigationMeta);
 		
+			
+		
 		if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			if(e.getItem().getItemMeta().getDisplayName().equals("§cNavigation")) {
-				e.setCancelled(true);
 				
 				Inventory inv = Bukkit.createInventory(null, 3*9, "§d§lNavigation");
 				
 				ItemStack placeholder = new ItemStack(Material.STAINED_GLASS_PANE,1,(short)7);
 				ItemMeta placeholderMeta = placeholder.getItemMeta();
-				placeholderMeta.setDisplayName("");
+				placeholderMeta.setDisplayName(" ");
 				placeholder.setItemMeta(placeholderMeta);
 				
 				ItemStack head = new ItemStack(Material.SKULL_ITEM,1,(short)3);
@@ -51,22 +53,22 @@ public class Navigation implements Listener{
 				skull.setOwner(p.getName());
 				head.setItemMeta(skull);
 				
-				ItemStack bed = new ItemStack(Material.BED,1,(short)0);
+				ItemStack bed = new ItemStack(Material.BED);
 				ItemMeta bedMeta = bed.getItemMeta();
 				bedMeta.setDisplayName("§cBedWars");
 				bed.setItemMeta(bedMeta);
 				
-				ItemStack tnt = new ItemStack(Material.TNT,1,(short)0);
+				ItemStack tnt = new ItemStack(Material.TNT);
 				ItemMeta tntMeta = tnt.getItemMeta();
 				tntMeta.setDisplayName("§cTNT-Run");
 				tnt.setItemMeta(tntMeta);
 				
-				ItemStack sword = new ItemStack(Material.IRON_SWORD,1,(short)0);
+				ItemStack sword = new ItemStack(Material.IRON_SWORD);
 				ItemMeta swordMeta = sword.getItemMeta();
 				swordMeta.setDisplayName("§cSurvivalGames");
 				sword.setItemMeta(swordMeta);
 				
-				ItemStack close = new ItemStack(Material.BARRIER,1,(short)0);
+				ItemStack close = new ItemStack(Material.BARRIER);
 				ItemMeta closeMeta = close.getItemMeta();
 				closeMeta.setDisplayName("§cSchließen");
 				close.setItemMeta(closeMeta);
@@ -114,27 +116,9 @@ public class Navigation implements Listener{
 					@Override
 					public void run() {			
 						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
-						for (int counter3 = 27; counter3 <= 35; counter3++) {
-			            	inv.setItem(counter3, placeholder);
-			            }
-					}	            	
-	            }, 4);
-				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
-					@Override
-					public void run() {			
-						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
-						for (int counter4 = 36; counter4 <= 44; counter4++) {
-			            	inv.setItem(counter4, placeholder);
-			            }
-					}	            	
-	            }, 7);
-				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
-					@Override
-					public void run() {			
-						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 						inv.setItem(12, bed);
 					}	            	
-	            }, 11);
+	            }, 4);
 				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
 					@Override
 					public void run() {			
@@ -142,7 +126,7 @@ public class Navigation implements Listener{
 			            
 			            inv.setItem(13, tnt);
 					}	            	
-	            }, 13);
+	            }, 7);
 				 Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
 						@Override
 						public void run() {			
@@ -150,7 +134,7 @@ public class Navigation implements Listener{
 				            
 				            inv.setItem(14, sword);
 						}	            	
-		           }, 15);
+		           }, 11);
 				 Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
 						@Override
 						public void run() {			
@@ -158,7 +142,7 @@ public class Navigation implements Listener{
 				            
 				            inv.setItem(18, head);
 						}	            	
-		           }, 9);
+		           }, 14);
 				 Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
 						@Override
 						public void run() {			
@@ -169,9 +153,25 @@ public class Navigation implements Listener{
 		           }, 17);
 				
 			}
+			
 		}
-		return navigation;
 		
+	
+		
+	}
+	@EventHandler 	public void onClick(InventoryClickEvent e) {	
+		
+		//Cancel console error when clicking outside the inventory "§d§lNavigation" or clicking your own inventoryslots
+		if(e.getCurrentItem() == null){			
+			return;			
+		}else if(!e.getCurrentItem().hasItemMeta()) {
+			return;
+		}
+		
+		//When you try to get item out of the inventory "§d§lNavigation" cancel this action
+			if(e.getInventory().getName().equals("§d§lNavigation")) { 
+				   e.setCancelled(true);	
+			}
 	}
 
 }

@@ -1,6 +1,7 @@
 package me.vreaz.main;
 
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,13 +19,16 @@ import me.vreaz.manager.ConfigManager;
 
 public class Main extends JavaPlugin {
 	
-
+	public static Plugin plugin;
+	public static String prefix = "§3§lDG §7» ";
+	
 	@Override
 	public void onEnable() {
-		System.out.print("�aDas Plugin wurde erfolgreich gestartet!");
+		System.out.print("§aDas Plugin wurde erfolgreich gestartet!");
 		
 		PluginManager pm = Bukkit.getServer().getPluginManager();
 		
+		pm.registerEvents(new SneakListener(), this); 
 		pm.registerEvents(new SneakListener(), this); 
 		pm.registerEvents(new RunListener(), this); 
 		pm.registerEvents(new JoinListener(), this);
@@ -49,7 +53,7 @@ public class Main extends JavaPlugin {
 	
 	public void onDisable() {
 		
-		System.out.print("�4Das Plugin wurde NICHT erfolgreich gestartet!");
+		System.out.print("§4Das Plugin wurde erfolgreich gestartet!");
 		
 	}
 	

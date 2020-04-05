@@ -1,9 +1,9 @@
 package me.vreaz.inventories;
 
 import java.util.ArrayList;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,10 +11,14 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.inventivetalent.particle.ParticleEffect;
 
-public class HidePlayers implements Listener {
+import me.vreaz.manager.ActionBar;
 
+public class HidePlayers implements Listener {
+	
 	@EventHandler
 	public void hidePlayers(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
@@ -37,21 +41,31 @@ public class HidePlayers implements Listener {
 
 			if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 				if(e.getItem().getItemMeta().getDisplayName().equals("§cSpieler verstecken")) {
-				for(Player all : Bukkit.getOnlinePlayers()) {
-					p.hidePlayer(all);
-					p.getInventory().setItem(8, null);
-					p.getInventory().setItem(8, hiddenPlayers);
-					ParticleEffect.LAVA.send(Bukkit.getOnlinePlayers(), all.getLocation(), 1, 1, 1, 0, 10);
-				}
-			}else if(e.getItem().getItemMeta().getDisplayName().equals("§aSpieler anzeigen")) {
-				for(Player all : Bukkit.getOnlinePlayers()) {
-					p.showPlayer(all);
-					p.getInventory().setItem(8, null);
-					p.getInventory().setItem(8, shownPlayers);				
-					ParticleEffect.LAVA.send(Bukkit.getOnlinePlayers(), all.getLocation(), 1, 1, 1, 0, 10);
-				}
-			}
-		}
+						for(Player all : Bukkit.getOnlinePlayers()) {	
+							p.hidePlayer(all);
+							p.getInventory().setItem(8, null);
+							p.getInventory().setItem(8, hiddenPlayers);
+							p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 10, 99999));
+							p.playSound(p.getLocation(), Sound.LEVEL_UP, 1f, 1f);
+							ActionBar.sendActionBar(p.getPlayer(), "§7Du zeigst nun §ckeinen §7Spieler an!");
+							ParticleEffect.LAVA.send(Bukkit.getOnlinePlayers(), all.getLocation(), 1, 1, 1, 0, 10);	
+						}
+				}else if(e.getItem().getItemMeta().getDisplayName().equals("§aSpieler anzeigen")) {
+							
+							for(Player all : Bukkit.getOnlinePlayers()) {
+								p.showPlayer(all);
+								p.getInventory().setItem(8, null);
+								p.getInventory().setItem(8, shownPlayers);				
+								p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 10, 9999));
+								p.playSound(p.getLocation(), Sound.LEVEL_UP, 1f, 1f);
+								ActionBar.sendActionBar(p.getPlayer(), "§7Du zeigst nun §aalle §7Spieler an!");
+								ParticleEffect.LAVA.send(Bukkit.getOnlinePlayers(), all.getLocation(), 1, 1, 1, 0, 10);
+							}
+							}
+					}
+						
+					}
 	}
 
-}
+
+
