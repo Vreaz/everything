@@ -158,7 +158,7 @@ public class Lottery implements Listener{
 
 
 	@EventHandler 
-	public void losekaufen(InventoryClickEvent e) {	
+	public void losekaufen(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();			
 		Inventory shop = Bukkit.createInventory(null, 9, "§a§lLose kaufen");			
 		if(e.getCurrentItem() == null){

@@ -48,7 +48,16 @@ public class JoinListener implements Listener{
 		shownPlayersMeta.setLore(shownPlayersLore);
 		shownPlayers.setItemMeta(shownPlayersMeta);
 		
+		ItemStack navigation = new ItemStack(Material.COMPASS,1,(short)0);
+		ItemMeta navigationMeta = navigation.getItemMeta();
+		ArrayList <String> navigationLore = new ArrayList<>();
+		navigationLore.add("§7Rechtsklick um die Navigation zu öffnen");
+		navigationMeta.setDisplayName("§cNavigation");
+		navigationMeta.setLore(navigationLore);
+		navigation.setItemMeta(navigationMeta);
+		
 		p.getInventory().setItem(8, shownPlayers);
+		p.getInventory().setItem(0, navigation);
 		
 	}
 	
