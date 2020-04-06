@@ -3,11 +3,8 @@ package me.vreaz.listener;
 
 import java.util.ArrayList;
 
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,9 +23,12 @@ import org.bukkit.util.Vector;
 
 import com.connorlinfoot.titleapi.TitleAPI;
 
-import me.vreaz.main.Main;
+
 
 public class JoinListener implements Listener{
+	
+	 
+	
 	@EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
@@ -56,8 +56,10 @@ public class JoinListener implements Listener{
 		navigationMeta.setLore(navigationLore);
 		navigation.setItemMeta(navigationMeta);
 		
+		
 		p.getInventory().setItem(8, shownPlayers);
 		p.getInventory().setItem(0, navigation);
+
 		
 	}
 	

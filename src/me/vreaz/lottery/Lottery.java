@@ -172,8 +172,6 @@ public class Lottery implements Listener{
 			
 			
 			if(e.getInventory().getName().equals("§d§lLose")) {
-				if(e.getInventory().getName().equals("Reparatur")) {
-				e.setCancelled(true);
 			if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§dLose kaufen" )) {
 				e.setCancelled(true);
 
@@ -219,7 +217,7 @@ public class Lottery implements Listener{
 	            shop.setItem(2, air);
 	            shop.setItem(4, air);
 	            shop.setItem(6, air);
-	            
+	            p.closeInventory();
 				p.openInventory(shop);
 				
 				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
@@ -257,7 +255,7 @@ public class Lottery implements Listener{
 			}
 		}
 	
-	}		
+	
 					
 					
 
@@ -282,13 +280,134 @@ public class Lottery implements Listener{
 						} if(e.getInventory().getName().equals("§5§lLotterie")) {
 							if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cZurück ✘")) {
 								p.closeInventory();
-								
+								Inventory inv = Bukkit.createInventory(null, 5*9, "§d§lLose");
+
+					            
+					            
+					            ItemStack placeholder = new ItemStack(Material.STAINED_GLASS_PANE,1, (short)7);
+					            ItemMeta placeholder01 = placeholder.getItemMeta();
+					            placeholder01.setDisplayName(" ");
+					            placeholder.setItemMeta(placeholder01);
+					           
+					            
+					            ItemStack ticket = new ItemStack(Material.PAPER);
+					            ItemMeta ticket01 = ticket.getItemMeta();
+					            ticket01.setDisplayName("§7Deine Lose");
+					            ArrayList<String> ticketlore = new ArrayList<>();
+					            int deinelose = ConfigManager.get().getInt(p.getName() + ".lose");
+					            
+					            ticketlore.add("§8➥ §e" + deinelose);
+					            ticket01.setLore(ticketlore);
+					            ticket.setItemMeta(ticket01);
+					            
+					            ItemStack air = new ItemStack(Material.AIR);
+					            ItemMeta airmeta = air.getItemMeta();
+					            air.setItemMeta(airmeta);
+					            
+					            ItemStack losekaufen = new ItemStack(Material.CHEST);
+					            ItemMeta losekaufenmeta = losekaufen.getItemMeta();
+					            losekaufenmeta.setDisplayName("§dLose kaufen");
+					            losekaufen.setItemMeta(losekaufenmeta);
+					            
+					            ItemStack einlösen = new ItemStack(Material.NETHER_STAR);
+					            ItemMeta einlösenmeta = einlösen.getItemMeta();
+					            einlösenmeta.setDisplayName("§eEinlösen");
+					            einlösen.setItemMeta(einlösenmeta);
+					           	            
+					            
+					           
+					            
+					            
+					            
+					            p.openInventory(inv);
+					            
+					            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+									@Override
+									public void run() {			
+										p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
+										
+										for (int counter0 = 0; counter0 <= 8; counter0++) {
+							            	inv.setItem(counter0, placeholder);
+							            }
+									}	            	
+					            }, 1);
+					            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+									@Override
+									public void run() {			
+										p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
+										for (int counter1 = 9; counter1 <= 17; counter1++) {
+							            	inv.setItem(counter1, placeholder);
+							            }
+									}	            	
+					            }, 2);
+					            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+									@Override
+									public void run() {			
+										p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
+										for (int counter2 = 18; counter2 <= 26; counter2++) {
+							            	inv.setItem(counter2, placeholder);
+							            	 inv.setItem(20, air);
+							            	 inv.setItem(22, air);
+							            	 inv.setItem(24, air);
+							            }
+									}	            	
+					            }, 3);
+					            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+									@Override
+									public void run() {			
+										p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
+										for (int counter3 = 27; counter3 <= 35; counter3++) {
+							            	inv.setItem(counter3, placeholder);
+							            }
+									}	            	
+					            }, 4);
+					            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+									@Override
+									public void run() {			
+										p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
+										for (int counter4 = 36; counter4 <= 44; counter4++) {
+							            	inv.setItem(counter4, placeholder);
+							            }
+									}	            	
+					            }, 5);
+					            
+					            
+					            
+					            
+					            
+					            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+									@Override
+									public void run() {			
+										p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
+										inv.setItem(20, ticket);
+									}	            	
+					            }, 8);
+					            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+									@Override
+									public void run() {			
+										p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
+							            
+							            inv.setItem(22, einlösen);
+									}	            	
+					            }, 11);
+					            Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+									@Override
+									public void run() {			
+										p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
+							            
+							            inv.setItem(24, losekaufen);
+									}	            	
+					            }, 14);
+					            
+						}
+
+						}
 							
 					
 						} 
-						}
+					
 						
-									}
+								
 					@EventHandler 
 					public void loseClick(InventoryClickEvent e) {								
 							Player p = (Player) e.getWhoClicked();		
@@ -312,7 +431,7 @@ public class Lottery implements Listener{
 									
 									ConfigManager.get().set(p.getName() + ".lose", auszahlung);
 									ConfigManager.save();
-									p.sendMessage("§3§lDG §7» Du hast §a1x Los gekauft!");
+									p.sendMessage("§3§lDG §7» Du hast §a1x Los§7 gekauft!");
 									p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 									
 									} else {
@@ -350,7 +469,7 @@ public class Lottery implements Listener{
 									
 									ConfigManager.get().set(p.getName() + ".lose", auszahlung);
 									ConfigManager.save();
-									p.sendMessage("§3§lDG §7» Du hast §a3x Los gekauft!");
+									p.sendMessage("§3§lDG §7» Du hast §a3x Lose§7 gekauft!");
 									p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 									
 									} else {
@@ -385,7 +504,7 @@ public class Lottery implements Listener{
 									
 									ConfigManager.get().set(p.getName() + ".lose", auszahlung);
 									ConfigManager.save();
-									p.sendMessage("§3§lDG §7» Du hast §a5x Los gekauft!");
+									p.sendMessage("§3§lDG §7» Du hast §a5x Lose§7 gekauft!");
 									p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
 									
 									} else {

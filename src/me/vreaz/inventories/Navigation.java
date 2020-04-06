@@ -19,7 +19,6 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.util.Vector;
 
 import de.NeonnBukkit.CoinsAPI.Main;
-import sun.net.www.content.text.plain;
 
 public class Navigation implements Listener{
 	
@@ -37,15 +36,27 @@ public class Navigation implements Listener{
 		
 			
 		
-		if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+		if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {			
+			if(e.getItem() == null){		
+				return;
+				
+			}else if(!e.getItem().hasItemMeta()) {		
+				return;
+			}
+			{
 			if(e.getItem().getItemMeta().getDisplayName().equals("§cNavigation")) {
 				
-				Inventory inv = Bukkit.createInventory(null, 3*9, "§d§lNavigation");
+				Inventory inv = Bukkit.createInventory(null, 5*9, "§d§lNavigation");
 				
 				ItemStack placeholder = new ItemStack(Material.STAINED_GLASS_PANE,1,(short)7);
 				ItemMeta placeholderMeta = placeholder.getItemMeta();
 				placeholderMeta.setDisplayName(" ");
 				placeholder.setItemMeta(placeholderMeta);
+				
+				ItemStack placeholder2 = new ItemStack(Material.STAINED_GLASS_PANE,1,(short)15);
+				ItemMeta placeholderMeta2 = placeholder2.getItemMeta();
+				placeholderMeta2.setDisplayName(" ");
+				placeholder2.setItemMeta(placeholderMeta2);
 				
 				ItemStack head = new ItemStack(Material.SKULL_ITEM,1,(short)3);
 				SkullMeta skull = (SkullMeta) head.getItemMeta();
@@ -56,19 +67,41 @@ public class Navigation implements Listener{
 				skull.setOwner(p.getName());
 				head.setItemMeta(skull);
 				
+				ItemStack spawn = new ItemStack(Material.SLIME_BALL);
+				ItemMeta spawnMeta = spawn.getItemMeta();
+				spawnMeta.setDisplayName("§7» §a§lSpawn §7«");
+				ArrayList<String> spawnLore = new ArrayList<String>();
+				spawnLore.add("§7§oRechtsklick zum teleportieren.");
+				spawnMeta.setLore(spawnLore);
+				spawn.setItemMeta(spawnMeta);
+				
 				ItemStack bed = new ItemStack(Material.BED);
 				ItemMeta bedMeta = bed.getItemMeta();
-				bedMeta.setDisplayName("§cBedWars");
+				bedMeta.setDisplayName("§7» §fBed§cWars §7«");
+				ArrayList<String> bedLore = new ArrayList<String>();
+				bedLore.add("§7§oRechtsklick zum teleportieren.");
+				bedMeta.setLore(bedLore);
 				bed.setItemMeta(bedMeta);
+				
+				ItemStack ttt = new ItemStack(Material.STICK);
+				ItemMeta tttmeta = bed.getItemMeta();
+				tttmeta.setDisplayName("§7» §cTTT §7«");
+				ArrayList<String> tttlore = new ArrayList<String>();
+				tttlore.add("§7§oRechtsklick zum teleportieren.");
+				tttmeta.setLore(tttlore);
+				ttt.setItemMeta(tttmeta);
 				
 				ItemStack tnt = new ItemStack(Material.TNT);
 				ItemMeta tntMeta = tnt.getItemMeta();
-				tntMeta.setDisplayName("§cTNT-Run");
+				tntMeta.setDisplayName("§7» §4TNT§7-§cRun §7«");
+				ArrayList<String> tntlore = new ArrayList<String>();
+				tntlore.add("§7§oRechtsklick zum teleportieren.");
+				tntMeta.setLore(tntlore);
 				tnt.setItemMeta(tntMeta);
 				
 				ItemStack sword = new ItemStack(Material.IRON_SWORD);
 				ItemMeta swordMeta = sword.getItemMeta();
-				swordMeta.setDisplayName("§cSurvivalGames");
+				swordMeta.setDisplayName("§7» §bSurvival§3Games §7«");
 				sword.setItemMeta(swordMeta);
 				
 				ItemStack close = new ItemStack(Material.BARRIER);
@@ -86,82 +119,135 @@ public class Navigation implements Listener{
 					@Override
 					public void run() {
 						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
+						inv.setItem(18, placeholder2);
+						inv.setItem(26, placeholder2);
 						
-						for (int counter0 = 0; counter0 <= 8; counter0++) {
-							inv.setItem(counter0, placeholder);
-						}
 					}
-				}, 1);
-				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
-					@Override
-					public void run() {			
-						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
-						for (int counter1 = 9; counter1 <= 17; counter1++) {
-			            	inv.setItem(counter1, placeholder);
-			            }
-					}	            	
-	            }, 2);
-				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
-					@Override
-					public void run() {			
-						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
-						for (int counter2 = 18; counter2 <= 26; counter2++) {
-			            	inv.setItem(counter2, placeholder);
-			            	 inv.setItem(12, air);
-			            	 inv.setItem(13, air);
-			            	 inv.setItem(14, air);
-			            	 inv.setItem(18, air);
-			            	 inv.setItem(26, air);
-			            }
-					}	            	
-	            }, 3);
-				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
-					@Override
-					public void run() {			
-						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
-						inv.setItem(12, bed);
-					}	            	
-	            }, 4);
-				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
-					@Override
-					public void run() {			
-						p.playSound(p.getLocation(), Sound.NOTE_PLING, 1f, 1f);
-			            
-			            inv.setItem(13, tnt);
-					}	            	
-	            }, 7);
-				 Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
-						@Override
-						public void run() {			
-							p.playSound(p.getLocation(), Sound.NOTE_PLING, 1f, 1f);
-				            
-				            inv.setItem(14, sword);
-						}	            	
-		           }, 11);
-				 Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
-						@Override
-						public void run() {			
-							p.playSound(p.getLocation(), Sound.NOTE_PLING, 1f, 1f);
-				            
-				            inv.setItem(18, head);
-						}	            	
-		           }, 14);
-				 Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
-						@Override
-						public void run() {			
-							p.playSound(p.getLocation(), Sound.NOTE_PLING, 1f, 1f);
-				            
-				            inv.setItem(26, close);
-						}	            	
-		           }, 17);
-				
-			}
 			
-		}
-		
-	
-		
+			}, 1);
+				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+					@Override
+					public void run() {
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
+						inv.setItem(9, placeholder2);
+						inv.setItem(27, placeholder2);
+						inv.setItem(17, placeholder2);
+						inv.setItem(35, placeholder2);
+						
+					}
+			
+			}, 2);
+				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+					@Override
+					public void run() {
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
+						inv.setItem(16, placeholder2);
+						inv.setItem(34, placeholder2);
+						inv.setItem(10, placeholder2);
+						inv.setItem(28, placeholder2);
+						
+					}
+			
+			}, 3);
+				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+					@Override
+					public void run() {
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
+						inv.setItem(1, placeholder2);
+						inv.setItem(37, placeholder2);
+						inv.setItem(43, placeholder2);
+						inv.setItem(7, placeholder2);
+						
+					}
+			
+			}, 4);
+				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+					@Override
+					public void run() {
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
+						inv.setItem(2, placeholder2);
+						inv.setItem(6, placeholder2);
+						inv.setItem(38, placeholder2);
+						inv.setItem(42, placeholder2);
+						
+					}
+			
+			}, 5);
+				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+					@Override
+					public void run() {
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
+						inv.setItem(3, placeholder);
+						inv.setItem(5, placeholder);
+						inv.setItem(39, placeholder);
+						inv.setItem(41, placeholder);
+						
+					}
+			
+			}, 6);
+				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+					@Override
+					public void run() {
+						p.playSound(p.getLocation(), Sound.CLICK, 1f, 1f);
+						inv.setItem(0, placeholder);
+						inv.setItem(8, placeholder);
+						inv.setItem(36, placeholder);
+						inv.setItem(44, placeholder);
+						
+					}
+			
+			}, 7);
+				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+					@Override
+					public void run() {
+						p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1f, 1f);
+						inv.setItem(22, spawn);
+						
+					}
+			
+			}, 9);
+				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+					@Override
+					public void run() {
+						p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1f, 1f);
+						inv.setItem(20, bed);
+						
+					}
+			
+			}, 12);
+				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+					@Override
+					public void run() {
+						p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1f, 1f);
+						inv.setItem(24, sword);
+						
+					}
+			
+			}, 14);
+				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+					@Override
+					public void run() {
+						p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1f, 1f);
+						
+						inv.setItem(40, ttt);
+						
+					}
+			
+			}, 16);
+				Bukkit.getScheduler().runTaskLater(Main.getPlugin(Main.class), new Runnable() {
+					@Override
+					public void run() {
+						p.playSound(p.getLocation(), Sound.ORB_PICKUP, 1f, 1f);
+						inv.setItem(4, tnt);
+						
+					}
+			
+			}, 18);
+        }
 	}
+}
+}
+
 	@EventHandler 	public void onClick(InventoryClickEvent e) {	
 		
 		//Cancel console error when clicking outside the inventory "§d§lNavigation" or clicking your own inventoryslots
@@ -175,18 +261,57 @@ public class Navigation implements Listener{
 		if(e.getInventory().getName().equals("§d§lNavigation")) { 
 			e.setCancelled(true);	
 		}
-		
 		if(e.getInventory().getName().equals("§d§lNavigation")) {
-			if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cSchließen")) {
+			if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§7» §fBed§cWars §7«")) {
 				Player p = (Player)e.getWhoClicked();
-				p.closeInventory();
-			}
-		}
-		if(e.getInventory().getName().equals("§d§lNavigation")) {
-			if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§cBedWars")) {
-				Player p = (Player)e.getWhoClicked();
-				Location xyz = new Location(p.getWorld(),88,151,27);
+				p.setVelocity(new Vector(0, 0.5, 0));
+				p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 1f, 1f);
+				Location xyz = new Location(p.getWorld(),88,151,27, (float)-97.3 , (float) -1.6);
 				p.teleport(xyz);
+						
+				
+			}if(e.getInventory().getName().equals("§d§lNavigation")) {
+				if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§7» §a§lSpawn §7«")) {
+					Player p = (Player)e.getWhoClicked();
+					p.setVelocity(new Vector(0, 0.5, 0));
+					p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 1f, 1f);
+					Location xyz = new Location(p.getWorld(),63.506, 157.0000, 65.514, (float)-179.9 , (float) 2.8);
+					p.teleport(xyz);
+							
+					
+				}
+			}if(e.getInventory().getName().equals("§d§lNavigation")) {
+				if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§7» §cTTT §7«")) {
+					Player p = (Player)e.getWhoClicked();
+					p.setVelocity(new Vector(0, 0.5, 0));
+					p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 1f, 1f);
+					Location xyz = new Location(p.getWorld(),55,149,8, (float)-171.6 , (float) -2.7);
+					p.teleport(xyz);
+					
+							
+					
+				}
+			}if(e.getInventory().getName().equals("§d§lNavigation")) {
+				if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§7» §bSurvival§3Games §7«")) {
+					Player p = (Player)e.getWhoClicked();
+					p.setVelocity(new Vector(0, 0.5, 0));
+					p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 1f, 1f);
+					Location xyz = new Location(p.getWorld(),28.615,152,51.897, (float)94.2 , (float) -6.8);
+					p.teleport(xyz);
+							
+					
+				}
+			}if(e.getInventory().getName().equals("§d§lNavigation")) {
+				if(e.getCurrentItem().getItemMeta().getDisplayName().equals("§7» §4TNT§7-§cRun §7«")) {
+					Player p = (Player)e.getWhoClicked();
+					p.setVelocity(new Vector(0, 0.5, 0));
+					p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 1f, 1f);
+					Location xyz = new Location(p.getWorld(),37,154,36, (float)93.8 , (float) -4.0);
+					p.teleport(xyz);
+					
+							
+					
+				}
 			}
 		}
 		
